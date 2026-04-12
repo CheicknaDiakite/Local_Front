@@ -1,0 +1,160 @@
+@media print {
+    body {
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+  
+    .print-container {
+      width: 100%;
+      margin: 0 auto;
+      page-break-after: always;
+    }
+  
+    @page {
+      size: A4;
+      margin: 1cm;
+    }
+  
+    @page A3 {
+      size: A3;
+    }
+  
+    @page A5 {
+      size: A5;
+    }
+  
+    @page A10 {
+      size: A10;
+    }
+  
+    .no-print {
+      display: none !important;
+    }
+
+    /* Styles pour répéter l'en-tête de la table sur chaque page */
+    thead {
+      display: table-header-group;
+    }
+    
+    tbody {
+      display: table-row-group;
+    }
+    
+    tr {
+      page-break-inside: avoid;
+    }
+    
+    /* Assurer que les cellules de l'en-tête restent visibles */
+    th {
+      background-color: #f8fafc !important;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    
+    /* Éviter les coupures de page dans les lignes de données */
+    td {
+      page-break-inside: avoid;
+    }
+
+    /* Styles spécifiques pour la table de facture */
+    .print-table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    .print-table-header {
+      display: table-header-group;
+    }
+    
+    .print-table-body {
+      display: table-row-group;
+    }
+    
+    .print-table th,
+    .print-table td {
+      border: 1px solid #e5e7eb;
+      padding: 8px;
+      text-align: left;
+    }
+    
+    .print-table th {
+      background-color: #f8fafc !important;
+      font-weight: 600;
+      color: #374151;
+    }
+
+    /* Classes de format dynamiques */
+    .print-container.format-a4 {
+      width: 210mm;
+      min-height: 297mm;
+    }
+
+    .print-container.format-a5 {
+      width: 148mm;
+      min-height: 210mm;
+    }
+
+    .print-container.format-a6 {
+      width: 105mm;
+      min-height: 148mm;
+    }
+
+    .print-container.format-a10 {
+      width: 26mm;
+      min-height: 37mm;
+      padding: 1mm !important;
+      font-size: 8px !important;
+    }
+
+    .print-container.format-thermal {
+      width: 80mm;
+      padding: 2mm !important;
+      font-size: 10px !important;
+    }
+
+    /* Ajustements pour format thermique et petits formats */
+    .format-thermal .MuiTypography-root,
+    .format-a10 .MuiTypography-root,
+    .format-a6 .MuiTypography-root {
+      font-size: 0.8rem !important;
+    }
+
+    .format-a10 .MuiTypography-root {
+      font-size: 0.6rem !important;
+    }
+
+    .format-thermal .MuiTypography-h4,
+    .format-a10 .MuiTypography-h4,
+    .format-a6 .MuiTypography-h4 {
+      font-size: 1rem !important;
+    }
+
+    .format-a10 .MuiTypography-h4 {
+      font-size: 0.8rem !important;
+    }
+
+    .format-thermal .MuiTypography-h5,
+    .format-a10 .MuiTypography-h5,
+    .format-a6 .MuiTypography-h5 {
+      font-size: 0.9rem !important;
+    }
+
+    .format-a10 .MuiTypography-h5 {
+      font-size: 0.7rem !important;
+    }
+
+    .format-thermal .p-4, .format-a10 .p-4, .format-a6 .p-4 {
+      padding: 4px !important;
+    }
+
+    .format-thermal .mb-8, .format-a10 .mb-8, .format-a6 .mb-8 {
+      margin-bottom: 1rem !important;
+    }
+
+    .format-thermal img, .format-a10 img, .format-a6 img {
+      height: 40px !important;
+      width: 40px !important;
+    }
+  }
+
+  

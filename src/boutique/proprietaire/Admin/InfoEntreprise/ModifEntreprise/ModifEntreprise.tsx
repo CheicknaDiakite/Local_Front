@@ -143,7 +143,7 @@ export default function ModifEntreprise() {
       </Box>
 
       {/* Enterprise ID & License Banner */}
-      <Card
+      {/* <Card
         elevation={0}
         variant="outlined"
         className="mb-8 overflow-hidden rounded-2xl"
@@ -176,7 +176,7 @@ export default function ModifEntreprise() {
             </Grid>
           </Grid>
         </CardContent>
-      </Card>
+      </Card> */}
 
       <form onSubmit={onSubmit}>
         <Stack spacing={4}>
@@ -244,7 +244,7 @@ export default function ModifEntreprise() {
                     placeholder="ex: Restauration, Commerce, Service..."
                     className={isMobile ? 'mobile-form-field' : ''}
                   />
-                  <FormControl fullWidth className={isMobile ? 'mobile-form-field' : ''}>
+                  {/* <FormControl fullWidth className={isMobile ? 'mobile-form-field' : ''}>
                     <InputLabel>Pays</InputLabel>
                     <Select
                       value={unEntreprise.pays}
@@ -258,7 +258,7 @@ export default function ModifEntreprise() {
                         </MenuItem>
                       ))}
                     </Select>
-                  </FormControl>
+                  </FormControl> */}
                 </Stack>
               </Grid>
             </Grid>
@@ -323,7 +323,7 @@ export default function ModifEntreprise() {
 
           {/* Form Actions */}
           <Box className={`flex items-center gap-4 ${isMobile ? 'flex-col' : 'justify-between'}`}>
-            <Button
+            {/* <Button
               variant="outlined"
               startIcon={<KeyIcon />}
               onClick={() => setOpen(true)}
@@ -331,7 +331,7 @@ export default function ModifEntreprise() {
               sx={{ color: 'gray.600', borderColor: 'gray.200' }}
             >
               Code d'abonnement
-            </Button>
+            </Button> */}
 
             <Button
               type="submit"

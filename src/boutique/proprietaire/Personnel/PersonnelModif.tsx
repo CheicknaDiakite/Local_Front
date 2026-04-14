@@ -179,9 +179,9 @@ export function PersonnelModif() {
                       fullWidth
                       label="Email"
                       variant="outlined"
-                      name="email_user"
+                      name="email"
                       onChange={onChange}
-                      value={unUser.email_user}
+                      value={unUser.email}
                       InputLabelProps={{
                         shrink: true,
                       }}

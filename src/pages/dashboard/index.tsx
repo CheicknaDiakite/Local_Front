@@ -10,6 +10,7 @@ import PersonAddAltIcon from '@mui/icons-material/PersonAddAlt';
 import FileCopyIcon from '@mui/icons-material/FileCopy';
 import FileOpenIcon from '@mui/icons-material/FileOpen';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import DiscountIcon from '@mui/icons-material/Discount';
 import AddBusinessIcon from '@mui/icons-material/AddBusiness';
 import { Link } from 'react-router-dom';
 import { FC, useState } from 'react';
@@ -228,9 +229,9 @@ export default function DashboardDefault() {
       disabled: (unEntreprise.licence_type === "Stock Simple")
     },
     (safeUnUser.role === 1 || safeUnUser.role === 2) && {
-      icon: <FileOpenIcon fontSize="inherit" />,
-      title: "Factures entrées (achat)",
-      description: "Factures des produits de l'entreprise",
+      icon: <DiscountIcon color="error" fontSize="inherit" />,
+      title: "Remise par facture",
+      description: "Remises sur les factures des produits de l'entreprise",
       className: "bg-gradient-to-br from-slate-50 to-slate-100",
       to: "/entreprise/produit/entre",
       disabled: (unEntreprise.licence_type === "Stock Simple")

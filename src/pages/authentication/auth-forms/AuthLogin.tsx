@@ -114,8 +114,8 @@ const AuthLogin: FC = () => {
               )}
 
               <TextField
-                label="Nom d'utilisateur ou Numero de telephone"
-                placeholder="Entrez votre identifiant ou numero de telephone"
+                label="Email ou Numero de telephone"
+                placeholder="Entrez votre email ou numero de telephone"
                 error={!!errors.username}
                 helperText={errors.username?.message}
                 {...register('username', {

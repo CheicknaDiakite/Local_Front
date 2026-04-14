@@ -49,7 +49,6 @@ interface RegisterFormData {
   numero: string;
   password: string;
   passwordConfirm: string;
-  pays: string;
 }
 
 const AuthRegister: FC = () => {
@@ -74,7 +73,6 @@ const AuthRegister: FC = () => {
       numero: '',
       password: '',
       passwordConfirm: '',
-      pays: ''
     }
   });
 
@@ -182,7 +180,7 @@ const AuthRegister: FC = () => {
                   />
                 </Grid>
 
-                <Grid item xs={12}>
+                <Grid item xs={12} sm={6}>
                   <TextField
                     label="Email"
                     type="email"
@@ -239,30 +237,7 @@ const AuthRegister: FC = () => {
                     disabled={isSubmitting}
                   />
                 </Grid>
-                <Grid item xs={12} sm={6}>
-                  <FormControl fullWidth error={!!errors.pays}>
-                    <InputLabel>Pays</InputLabel>
-                    <Select
-                      {...register('pays', { required: 'Le pays est requis' })}
-                      label="Pays"
-                      disabled={isSubmitting}
-                      startAdornment={
-                        <InputAdornment position="start" sx={{ ml: 1 }}>
-                          <PublicOutlinedIcon color="primary" />
-                        </InputAdornment>
-                      }
-                    >
-                      {countryOptions.map((option) => (
-                        <MenuItem key={option.value} value={option.label}>
-                          {option.label}
-                        </MenuItem>
-                      ))}
-                    </Select>
-                    {errors.pays && (
-                      <FormHelperText>{errors.pays.message}</FormHelperText>
-                    )}
-                  </FormControl>
-                </Grid>
+                
 
                 <Grid item xs={12} sm={6}>
                   <TextField

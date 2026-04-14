@@ -187,7 +187,7 @@ const EntrepriseDialog: FC<{
               onChange={onChange}
 
             />
-            <CountrySelect onChange={onCountryChange} label="Choisir le pays" />
+            {/* <CountrySelect onChange={onCountryChange} label="Choisir le pays" /> */}
             {/* <FormControl fullWidth>
             <InputLabel>Type de licence</InputLabel>
             <Select

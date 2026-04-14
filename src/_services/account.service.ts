@@ -38,7 +38,7 @@ const avisCreate = (data: AvisType) => {
 
 const userLogin = async (post: LoginType): Promise<RegisterResponse> => {
     try {
-        const response = await Axios.post('/utilisateur/login', post, { withCredentials: true })
+        const response = await Axios.post('/utilisateur/login', post)
         return response;
     } catch (error) {
         console.error("Error fetching boutiques:", error);

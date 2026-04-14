@@ -483,7 +483,7 @@ export default function Depense() {
                     } : {}}
                   />
 
-                  <MyTextField
+                  {/* <MyTextField
                     fullWidth
                     type="file"
                     label="Facture"
@@ -511,7 +511,7 @@ export default function Depense() {
                         }
                       }
                     } : {}}
-                  />
+                  /> */}
 
                   <div className={`${isMobile ? 'mobile-action-buttons' : 'flex justify-end space-x-2'} pt-4`}>
                     <Button 

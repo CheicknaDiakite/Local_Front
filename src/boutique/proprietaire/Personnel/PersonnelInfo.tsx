@@ -105,7 +105,7 @@ export default function PersonnelInfo() {
 
               <Box sx={{ px: 2 }}>
                 <Typography variant="subtitle2">Email</Typography>
-                <Typography variant="body1" gutterBottom>{unUser.email_user || 'Non renseigné'}</Typography>
+                <Typography variant="body1" gutterBottom>{unUser.email || 'Non renseigné'}</Typography>
 
                 <Typography variant="subtitle2" sx={{ mt: 2 }}>Téléphone</Typography>
                 <Typography variant="body1" gutterBottom>{unUser.numero || 'Non renseigné'}</Typography>

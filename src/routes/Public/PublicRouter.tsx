@@ -44,6 +44,8 @@ import { useFetchEntreprise } from '../../usePerso/fonction.user'
 import { BASE } from '../../_services/caller.service'
 import FactureDetail from '../../boutique/sortie/FactureDetail'
 import Historique from '../../boutique/proprietaire/historique/Historique'
+import FactureListe from '../../boutique/sortie/FactureListe'
+import RemiseFacture from '../../boutique/sortie/RemiseFacture'
 
 
 export default function PublicRouter() {
@@ -106,14 +108,15 @@ export default function PublicRouter() {
 
               <Route element={<ProtectedRoute requiredRole={[1, 2]} redirectPath="/" />}>
                 <Route path='entre'>
-                  <Route index element={<FacEntre />} />
+                  <Route index element={<RemiseFacture />} />
                   <Route path='modif/:uuid' element={<ModifProduitEntre />} />
                 </Route>
               </Route>
 
               <Route element={<ProtectedRoute requiredRole={[1, 2, 3]} redirectPath="/" />}>
                 <Route path='sortie'>
-                  <Route index element={<FacSortie />} />
+                  {/* <Route index element={<FacSortie />} /> */}
+                  <Route index element={<FactureListe />} />
                   <Route path='modif/:uuid' element={<ModifProduitSortie />} />
                 </Route>
               </Route>

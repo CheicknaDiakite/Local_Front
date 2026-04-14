@@ -373,12 +373,7 @@ const NavSide: React.FC = () => {
                     to="/entreprise/historique"
                     bgColor="text-white bg-gray-500"
                   />
-                  {/* <NavItem
-                icon={null}
-                label="Historique"
-                to="/entreprise/histori"
-                bgColor="text-white bg-gray-500"
-              /> */}
+                  
 
                   <NavItem
                     icon={null}
@@ -392,56 +387,12 @@ const NavSide: React.FC = () => {
             </>
           }
 
-          {(unUser.role === 1 && unUser.is_superuser) && <>
-
-            <NavItem
-              icon={<UserCircleIcon color="primary" />}
-              label="Les Admin"
-              to="/user/admin"
-              bgColor="text-white bg-blue-900"
-            />
-
-            <NavItem
-              icon={<UserCircleIcon color="primary" />}
-              label="Les Avis"
-              to="/user/avis"
-              bgColor="text-white bg-blue-900"
-            />
-          </>
-          }
-
-          {(unUser.role === 1 && unUser.is_cabinet) && <>
-            <NavItem
-              icon={<UserCircleIcon color="primary" />}
-              label="Mes inscrits"
-              to="/user/mesInscrit"
-              bgColor="text-white bg-blue-900"
-            />
-          </>
-          }
-
           <NavItem
             icon={<DescriptionIcon color="primary" />}
             label="Documentation"
             to="https://documentation.gest-stocks.com"
             bgColor="text-white bg-sky-900"
           />
-
-          <NavItem
-            icon={<HelpOutlineIcon color="primary" />}
-            label="Que pensez-vous ?"
-            onClick={() => setFeedbackDialogOpen(true)}
-            bgColor="text-white bg-sky-900"
-          />
-
-          {(unUser.role === 1 || unUser.role === 2) &&
-            <NavItem
-              icon={<HelpOutlineIcon color="primary" />}
-              label="Abonnement ?"
-              onClick={() => setHelpDialogOpen(true)}
-              bgColor="text-white bg-sky-900"
-            />
-          }
 
           <NavItem
             icon={<PowerIcon color="error" />}

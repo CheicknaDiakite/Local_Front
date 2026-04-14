@@ -94,8 +94,31 @@ export function formatNumberWithSpaces(number: string | number | null | undefine
 }
 
 export function foncError(error: any) {
+  const axiosData = error?.response?.data;
+  let message = error?.message || "Une erreur est survenue";
 
-  const message = error?.response?.data?.message || error.message || "Une erreur est survenue";
+  if (axiosData) {
+    if (typeof axiosData === "string") {
+      message = axiosData;
+    } else if (axiosData.message) {
+      message = axiosData.message;
+    } else if (axiosData.detail) {
+      message = axiosData.detail;
+    } else if (axiosData.non_field_errors) {
+      message = Array.isArray(axiosData.non_field_errors)
+        ? axiosData.non_field_errors.join(" ")
+        : String(axiosData.non_field_errors);
+    } else {
+      const firstValue = Object.values(axiosData).find((value) => !!value);
+      if (typeof firstValue === "string") {
+        message = firstValue;
+      } else if (Array.isArray(firstValue)) {
+        message = firstValue.join(" ");
+      } else if (firstValue) {
+        message = JSON.stringify(firstValue);
+      }
+    }
+  }
 
   return toast.error(message);
 }

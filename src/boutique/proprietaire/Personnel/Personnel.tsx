@@ -243,7 +243,7 @@ export default function Personnel() {
                                     Tél : {post.numero}
                                   </Typography>
                                   <Typography variant="body2" color="text.secondary" className={isMobile ? 'mobile-card-text' : ''}>
-                                    Email : {post.email_user}
+                                    Email : {post.email}
                                   </Typography>
                                   <div className="mt-2">
                                     <Chip
@@ -326,7 +326,7 @@ export default function Personnel() {
                                     Tél : {post.numero}
                                   </Typography>
                                   <Typography variant="body2" color="text.secondary" className={isMobile ? 'mobile-card-text' : ''}>
-                                    Email : {post.email_user}
+                                    Email : {post.email}
                                   </Typography>
                                   <div className="mt-2">
                                     <Chip
@@ -482,9 +482,9 @@ export default function Personnel() {
                   <MyTextField
                     label="Email"
                     type="email"
-                    {...register("email_user", { required: "Ce champ est obligatoire" })}
-                    error={!!errors.email_user}
-                    helperText={errors.email_user?.message}
+                    {...register("email", { required: "Ce champ est obligatoire" })}
+                    error={!!errors.email}
+                    helperText={errors.email?.message}
                     fullWidth
                     className={isMobile ? 'mobile-form-field' : ''}
                     sx={isMobile ? {

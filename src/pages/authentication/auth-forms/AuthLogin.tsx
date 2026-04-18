@@ -15,17 +15,21 @@ import {
   IconButton,
   Alert,
   Checkbox,
-  FormControlLabel
+  FormControlLabel,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogActions
 } from '@mui/material';
 import Visibility from '@mui/icons-material/Visibility';
 import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 import toast from 'react-hot-toast';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useLoginUser } from '../../../usePerso/fonction.user';
 import Bienvenue from '../../../_components/Card/Bienvenue';
-import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
+import AxiLocal from '../../../_services/code.service';
 
 // Note: Removed Bienvenue and scrolling text for a cleaner, more professional look.
 
@@ -35,9 +39,14 @@ interface LoginFormData {
 }
 
 const AuthLogin: FC = () => {
-  const { login, googleLogin } = useLoginUser();
+  const { login } = useLoginUser();
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(false);
+  const [verificationModalOpen, setVerificationModalOpen] = useState(false);
+  const [verificationCode, setVerificationCode] = useState('');
+  const [verificationError, setVerificationError] = useState('');
+  const [isVerificationSubmitting, setIsVerificationSubmitting] = useState(false);
 
   const {
     register,
@@ -70,6 +79,48 @@ const AuthLogin: FC = () => {
     } catch (error) {
       // Handled by interceptors mainly, but safe backup
       console.error(error);
+    }
+  };
+
+  const handleOpenVerificationModal = () => {
+    setVerificationError('');
+    setVerificationCode('');
+    setVerificationModalOpen(true);
+  };
+
+  const handleCloseVerificationModal = () => {
+    setVerificationModalOpen(false);
+    setVerificationError('');
+  };
+
+  const handleVerificationSubmit = async () => {
+    if (!verificationCode.trim()) {
+      setVerificationError('Veuillez entrer le code de vérification');
+      return;
+    }
+    setVerificationError('');
+    setIsVerificationSubmitting(true);
+
+    const payload = { code: verificationCode.trim() };
+
+    try {
+      const response = await AxiLocal.post('verify-code/', payload);
+      const responseData = response?.data || {};
+
+      toast.success(responseData.message || 'Code de vérification soumis avec succès');
+      
+      handleCloseVerificationModal();
+      if (responseData.verified === true) {
+        localStorage.setItem('verified', 'true');
+        navigate('/auth/register');
+      }
+    } catch (error: any) {
+      const serverMessage = error?.response?.data?.message || error?.message || 'Échec de la vérification';
+      setVerificationError(typeof serverMessage === 'string' ? serverMessage : 'Échec de la vérification');
+      toast.error('Impossible de vérifier le code');
+      console.error('Verification error:', error);
+    } finally {
+      setIsVerificationSubmitting(false);
     }
   };
 
@@ -206,39 +257,56 @@ const AuthLogin: FC = () => {
             </Typography>
           </Divider>
 
-          {/* <Box sx={{ display: 'flex', justifyContent: 'center', mb: 3 }}>
-            <GoogleLogin
-              onSuccess={(credentialResponse: CredentialResponse) => {
-                if (credentialResponse.credential) {
-                  googleLogin(credentialResponse.credential);
-                }
-              }}
-              onError={() => {
-                toast.error('Échec de la connexion Google');
-              }}
-              useOneTap
-              theme="outline"
-              size="large"
-              text="signin_with"
-              shape="rectangular"
-              width="100%"
-            />
-          </Box> */}
-
           <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 1 }}>
             <Typography variant="body2" color="text.secondary">
               Vous n'avez pas de compte ?
             </Typography>
             <Typography
-              component={Link}
-              to="/auth/register"
               variant="subtitle2"
               color="primary"
-              sx={{ textDecoration: 'none', fontWeight: 700, '&:hover': { textDecoration: 'underline' } }}
+              sx={{ textDecoration: 'none', fontWeight: 700, cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}
+              onClick={handleOpenVerificationModal}
             >
               S'inscrire
             </Typography>
           </Box>
+
+          <Dialog
+            open={verificationModalOpen}
+            onClose={handleCloseVerificationModal}
+            fullWidth
+            maxWidth="xs"
+          >
+            <DialogTitle>Code de vérification</DialogTitle>
+            <DialogContent>
+              <Typography variant="body2" color="text.secondary" sx={{ mb: 2 }}>
+                Entrez votre code de vérification pour continuer.
+              </Typography>
+              <TextField
+                label="Code de vérification"
+                placeholder="Entrez le code reçu"
+                value={verificationCode}
+                onChange={(event) => setVerificationCode(event.target.value)}
+                fullWidth
+                error={Boolean(verificationError)}
+                helperText={verificationError}
+                disabled={isVerificationSubmitting}
+              />
+            </DialogContent>
+            <DialogActions sx={{ px: 3, pb: 2 }}>
+              <Button onClick={handleCloseVerificationModal} color="inherit" disabled={isVerificationSubmitting}>
+                Annuler
+              </Button>
+              <Button
+                onClick={handleVerificationSubmit}
+                variant="contained"
+                color="primary"
+                disabled={isVerificationSubmitting}
+              >
+                {isVerificationSubmitting ? <CircularProgress size={20} color="inherit" /> : 'Valider'}
+              </Button>
+            </DialogActions>
+          </Dialog>
 
         </CardContent>
       </Card>

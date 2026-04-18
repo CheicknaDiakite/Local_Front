@@ -37,7 +37,9 @@ const Bienvenue: FC = () => {
         <TypeAnimation
           sequence={[
             'Bienvenue sur Gest Stocks',
-            1000
+            5000,
+            "Pour plus d'info contactez (+223 91 15 48 34)",
+            5000
           ]}
           wrapper="span"
           speed={50}

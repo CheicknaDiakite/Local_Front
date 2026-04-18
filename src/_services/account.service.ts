@@ -269,6 +269,7 @@ const logout = () => {
     localStorage.removeItem('account')
     localStorage.removeItem('entreprise-uuid')
     localStorage.removeItem('token_1')
+    localStorage.removeItem('verified')
     localStorage.removeItem('errorCount'); // Réinitialiser le compteur après déconnexion
     // Force le rafraîchissement de la page
     window.location.reload();
